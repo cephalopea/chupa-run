@@ -1,42 +1,62 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class touchableScript : MonoBehaviour {
-
-	//problems: things spawning at wrong height- tornadoes too high, houses too high, too tired to work on this rn
 
 	//now other stuff can find this
 	public float xPosition = default(float);
 	public float yPosition = default(float);
-	public float zPosition = default(float);
-	//so things know how big this is
-	public float height;
-	public float width;
-
-	//sets height and width
-	void GetSize() {
-		height = this.transform.lossyScale.y;
-		width = this.transform.lossyScale.x;
-	}
 
 	//updates this object's position for other objects to use and updates player's position for this object
-	void GetXPositions() {
+	void SetPositions() {
 		xPosition = this.transform.position.x;
 		yPosition = this.transform.position.y;
-		zPosition = this.transform.position.z;
 	}
 
-	void DefunctDespawn() {
-		float playerPosition = GameObject.FindWithTag ("chupacabra").GetComponent<touchableScript> ().xPosition;
+	public void GetX(float x) {
+		x = xPosition;
+	}
 
-		if (xPosition < (playerPosition - Screen.width)) {
+	public void GetY(float y) {
+		y = yPosition;
+	}
+
+	void SetColor(){
+		if (this.tag == "trap" || this.tag == "mob" || this.tag == "tornado") {
+			this.gameObject.GetComponent<Renderer> ().material.color = Color.red;
+		} else if (this.tag == "newGround" || this.tag == "house") {
+			this.gameObject.GetComponent<Renderer> ().material.color = Color.black;
+		} else if (this.tag == "chupacabra") {
+			this.gameObject.GetComponent<Renderer> ().material.color = Color.green;
+		} else if (this.tag == "kid" || this.tag == "goat") {
+			this.gameObject.GetComponent<Renderer> ().material.color = Color.cyan;
+		}
+	}
+
+	void FixZ() {
+		Vector3 FixedZ = new Vector3 (this.transform.position.x, this.transform.position.y, 0);
+		this.transform.position = FixedZ;
+	}
+
+	void Despawn() {
+		float playerPosition;
+		float mobPosition;
+
+		GameObject.FindWithTag ("mob").GetComponent<touchableScript> ().GetX(mobPosition);
+		GameObject.FindWithTag ("chupacabra").GetComponent<touchableScript> ().GetX(playerPosition);
+
+		if (xPosition < (playerPosition - 100) || (xPosition <= mobPosition + 33)) {
 			if (this.tag == "mob" || this.tag == "newGround" || this.tag == "oldGround" || this.tag == "chupacabra") {
 				//do nothing
 			} else {
 				GameObject me = this.gameObject;
 				Destroy (me);
 			}
+		} else if ((mobPosition + 25) >= playerPosition && this.tag == "mob"){
+			SceneManager.LoadScene("lvl1");
 		} else {
 			//do nothing
 		}
@@ -44,12 +64,13 @@ public class touchableScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GetSize ();
+		SetColor ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		GetXPositions ();
-		DefunctDespawn ();
+		SetPositions ();
+		FixZ ();
+		Despawn ();
 	}
 }

@@ -5,15 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - chupacabra
-  - newGround
+  - tornado
   - mob
+  - newGround
+  - oldGround
+  - kid
   - house
   - cactus
-  - tornado
   - trap
   - goat
-  - kid
-  - oldGround
+  - houseSide
   layers:
   - Default
   - TransparentFX
