@@ -1,133 +1,178 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class playerScript : MonoBehaviour {
+public class playerScript : touchableScript {
 
-	//problems: falls through ground
+	//to-do:
+	//-make obstacle spawn related to speed, so you can get around obstacles more easily (something about forcemode.impulse maybe)
 
-	//mobScript uses to decide if mob needs to speed up or not
-	public string playerTouched;
 	//change speed to change speed
-	float speed = 0.1f;
-	//used for jumping
-	Vector2 jump;
+	float speed = 10.0f;
+	//used for tornado jumping
+	Vector3 jump;
+	//used for jumping off of the side of a house
+	Vector3 unstuckJump;
+	Vector3 stuckJump;
+	//used to move backwards to try to avoid obstacles
+	Vector3 back;
 	float jumpForce = 4.0f;
-	Rigidbody2D myBody;
+	Rigidbody myBody;
 	bool isJumping;
+	GameObject touched;
+	bool touchedTrap;
+	Vector3 speedVector;
+	GameObject whatTrap;
+	float mobDistance;
 
-	void SetLocation() {
-		this.transform.position = new Vector3 (0f, 20f, 0f);
-		//remove green color once sprites are added
-		this.gameObject.GetComponent<Renderer> ().material.color = Color.green;
+	//prints distance from mob onscreen so you know how dead ya are
+	void OnGUI () {
+		GUI.Label (new Rect (10, 10, 150, 100), "Distance from Mob: " + mobDistance);
 	}
-
-	/*
-	//changes sprite if jumping
-	void Animate() {
-
-	}
-	*/
 
 	//sets the speed at which player runs, endlessly
-	void EndlessRun () {
-		Vector3 moveVector = new Vector3 ((this.transform.position.x + speed), this.transform.position.y, this.transform.position.z);
-		this.transform.position = moveVector;
-		//running = (running + 1);
+	void StartEndlessRun() {
+		myBody = this.gameObject.GetComponent<Rigidbody>();
+		speedVector = new Vector3 (1, myBody.velocity.y, 0);
+
+		myBody.velocity = (speedVector * speed);
 	}
 
-	//jump function, add to start
-	void JumpStart(){
-		myBody = this.gameObject.GetComponent<Rigidbody2D>();
-		jump = new Vector2 (0.0f, 3.0f);
+	//helps ensure the player stays moving forwards/at a min speed, unless trapped
+	void UpdateEndlessRun () {
+		if (touchedTrap == true) {
+			//do nothing
+		} else {
+			Vector3 awkwardFix = new Vector3 ((speedVector.x * speed), speedVector.y, speedVector.z);
+
+			if (myBody.velocity.y <= 0.5f) {
+				if (-0.5f <= myBody.velocity.y) {
+					isJumping = false;
+				} else {
+					isJumping = true;
+				}
+			} if (myBody.velocity.x < speed) {
+				myBody.velocity = awkwardFix;
+			} if (speed < 3.0f) {
+				speed = 3.0f;
+			}
+		}
+	}
+
+	void UpdateMobDistance() {
+		float mobSpot = GameObject.FindWithTag ("mob").GetComponent<touchableScript> ().xPosition;
+		mobDistance = this.transform.position.x - mobSpot;
 	}
 		
-	//jump function, add to update
+	//jump function, add to start
+	void JumpStart(){
+		unstuckJump = new Vector3 (0f, 3f, 0f);
+		stuckJump = new Vector3 (0f, 25f, 0f);
+		back = new Vector3 (-20f, 0f, 0f);
+	}
+		
+	//jump function, add to update, also lets you exit game to menu
 	void JumpUpdate(){
-		if(Input.GetKeyDown(KeyCode.Space) && isJumping == false){
-			myBody.AddForce(jump * jumpForce, ForceMode2D.Impulse);
+		if (Input.GetKeyDown (KeyCode.Space) && isJumping == false || Input.GetKeyDown (KeyCode.W) && isJumping == false) {
+			myBody.AddForce (jump * jumpForce, ForceMode.Impulse);
 			isJumping = true;
+		} if (Input.GetKeyDown (KeyCode.A)) {
+			myBody.AddForce(back, ForceMode.Impulse);
+		} if (Input.GetKeyDown(KeyCode.Escape)) {
+			SceneManager.LoadScene(0);
 		}
 	}
 
 	//checks if the player done dead
-	void OnCollisionEnter2D(Collision2D col) {
-		playerTouched = col.gameObject.tag;
+	void OnCollisionEnter(Collision col) {
 		if (col.gameObject.tag == "kid") {
 			speed = (speed * 1.5f);
-			//runningII = (runningII + 12);
 		} else if (col.gameObject.tag == "goat") {
 			speed = (speed * 1.25f);
-			//runningII = (runningII + 6);
-		} else if (col.gameObject.tag == "mob") {
-			IsDead ();
 		} else if (col.gameObject.tag == "cactus") {
 			speed = (speed * 0.75f);
-			//runningII = (runningII - 6);
 		} else if (col.gameObject.tag == "tornado") {
 			speed = (speed * 0.5f);
-			//runningII = (runningII - 12);
-			myBody.AddForce(jump * jumpForce, ForceMode2D.Impulse);
-			isJumping = true;
-		} else if (col.gameObject.tag == "house") {
-			TouchedHouse ();
+			myBody.AddForce(jump * jumpForce, ForceMode.Impulse);
+		} else if (col.gameObject.tag == "houseSide") {
+			touched = col.gameObject;
+			HouseSide ();
 		} else if (col.gameObject.tag == "newGround" || col.gameObject.tag == "oldGround") {
 			isJumping = false;
+			jump = unstuckJump;
 		} else if (col.gameObject.tag == "trap") {
-			StartCoroutine (TouchedTrap ());
+			whatTrap = col.gameObject;
+			if (touchedTrap == true) {
+				//nothing
+			} else {
+				StartCoroutine (TouchedTrap ());
+			}
 		} else {
 			Debug.Log ("OH DEAR GOD WHAT DID I STEP ON?! (playerScript.OnCollisionEnter())");
 		}
 	}
 
-	//decides if you've touched the front or side of a house, and responds accordingly
-	void TouchedHouse() {
-		float elevation = this.transform.position.x;
-		float height = this.transform.lossyScale.y;
-		float myElevation = (elevation - height / 2);
-		float houseHeight = GameObject.FindWithTag("house").GetComponent<touchableScript>().height;
-
-		if (myElevation > houseHeight) {
-			isJumping = false;
-		} else {
-			while (myElevation <= houseHeight) {
-				speed = 0;
-			}
-		}
-	}
-
 	//stops player for 3s when in a trap, and removes them from the trap so they aren't stuck over and over
 	IEnumerator TouchedTrap() {
-		float xPosition = this.transform.position.x;
+		touchedTrap = true;
+		float xPosition;
 
-		float trapWidth = GameObject.FindWithTag ("trap").GetComponent<touchableScript> ().width;
-		float trapLocation = GameObject.FindWithTag ("trap").GetComponent<touchableScript> ().xPosition;
-		float playerWidth = this.transform.lossyScale.x;
+		float trapWidth = 4f;
+		float trapLocation;
+		float playerWidth = 2f;
 		float trappedDepth = ((trapLocation + trapWidth / 2) - (xPosition - (playerWidth/2)));
 		float previousSpeed = speed;
 
+		this.GetComponent<touchableScript> ().GetX (xPosition);
+		whatTrap.GetComponent<touchableScript> ().GetX (trapLocation);
+
 		speed = 0;
-		yield return new WaitForSeconds (3);
+		this.gameObject.GetComponent<Rigidbody> ().velocity = new Vector3 (0, 0, 0);
 		Vector3 untrapped = new Vector3 ((this.transform.position.x + trappedDepth + 0.1f), this.transform.position.y, this.transform.position.z);
 		this.transform.position = untrapped;
+
+		yield return new WaitForSeconds (2);
+
 		speed = previousSpeed;
+		touchedTrap = false;
 	}
 
+	void HouseSide() {
+		float elevation;
+		float houseHeight = 6f;
+		float houseLocation;
+
+		this.GetComponent<touchableScript> ().GetY (elevation);
+		touched.GetComponent<touchableScript> ().GetX(houseLocation);
+
+		if (elevation <= houseHeight) {
+			isJumping = false;
+			if (elevation <= 5.5f) {
+				jump = stuckJump;
+			} else {
+				//do nothing
+			}
+		} else {
+			jump = unstuckJump;
+		}
+	}
+		
 	//restarts the level when you die
 	void IsDead() {
-		//restart the level, or whatever
+		SceneManager.LoadScene(1);
 	}
 
 	// Use this for initialization
 	void Start () {
-		SetLocation ();
+		StartEndlessRun ();
 		JumpStart ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//Animate ();
-		EndlessRun ();
+		UpdateEndlessRun ();
 		JumpUpdate ();
+		UpdateMobDistance ();
 	}
 }
