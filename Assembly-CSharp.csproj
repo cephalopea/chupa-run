@@ -53,11 +53,16 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Other\cameraScript.cs" />
      <Compile Include="Assets\Scripts\Other\guiScript.cs" />
-     <Compile Include="Assets\Scripts\World\Objects\groundScript.cs" />
-     <Compile Include="Assets\Scripts\World\Objects\mobScript.cs" />
-     <Compile Include="Assets\Scripts\World\Objects\planeScript.cs" />
-     <Compile Include="Assets\Scripts\World\Objects\playerScript.cs" />
-     <Compile Include="Assets\Scripts\World\oscillatoryScript.cs" />
+     <Compile Include="Assets\Scripts\Other\titleQuadScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\badObjectScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\mobScript.cs" />
+     <Compile Include="Assets\Scripts\World\Exists\groundScript.cs" />
+     <Compile Include="Assets\Scripts\World\Exists\houseScript.cs" />
+     <Compile Include="Assets\Scripts\World\Exists\shouseScript.cs" />
+     <Compile Include="Assets\Scripts\World\Good\goatScript.cs" />
+     <Compile Include="Assets\Scripts\World\Good\kidScript.cs" />
+     <Compile Include="Assets\Scripts\World\Good\playerScript.cs" />
+     <Compile Include="Assets\Scripts\World\objectScript.cs" />
      <Compile Include="Assets\Scripts\World\touchableScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
