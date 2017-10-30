@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class mobScript : touchableScript {
 
+	//public transform.pos.x
+	public float x;
 	//used by FindChup()
 	GameObject chupacabra;
 	playerScript chupScript;
@@ -22,6 +24,10 @@ public class mobScript : touchableScript {
 	float chupPosition = default(float);
 	//used by Restart()
 	float liveChupPosition = default(float);
+
+	void GetPosition () {
+		x = this.transform.position.x;
+	}
 
 	//finds the player and attached player script, sets them to local variables for later use
 	void FindChup() {
@@ -49,7 +55,7 @@ public class mobScript : touchableScript {
 	//decides if mob needs to chase player faster
 	void GetKidCount() {
 		if (adjustableKidCount > kidCount) {
-			chupScript.GetX(chupPosition);
+			chupPosition = chupScript.x;
 			previousSpeed = speed;
 			fasterChase = true;
 			speed = (speed * 1.5f);
@@ -77,7 +83,7 @@ public class mobScript : touchableScript {
 
 	//restarts the level if the mob has caught the player
 	void Restart() {
-		chupScript.GetX (liveChupPosition);
+		liveChupPosition = chupScript.x;
 		if ((this.transform.position.x + 25) >= liveChupPosition) {
 			SceneManager.LoadScene ("lvl1");
 		}
@@ -92,6 +98,7 @@ public class mobScript : touchableScript {
 	
 	// Update is called once per frame
 	void Update () {
+		GetPosition ();
 		UpdateEndlessChase ();
 		GetKidCount ();
 		FasterChase ();

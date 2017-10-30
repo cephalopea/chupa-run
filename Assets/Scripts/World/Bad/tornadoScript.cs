@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class badObjectScript : objectScript {
+public class tornadoScript : objectScript {
 
 	void OnCollisionEnter(Collision col) {
 		if (col.gameObject.tag == "chupacabra") {
@@ -14,9 +14,9 @@ public class badObjectScript : objectScript {
 	void Start () {
 		SetColor (Color.red);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+		DefunctDespawn (4f, this.gameObject);
 	}
 }

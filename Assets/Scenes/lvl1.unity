@@ -258,6 +258,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54260073814661280, guid: 855eba0329f704f05a505d8b5ab0a0be,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64445048484001232, guid: 855eba0329f704f05a505d8b5ab0a0be,
+        type: 2}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 855eba0329f704f05a505d8b5ab0a0be, type: 2}
   m_IsPrefabParent: 0
@@ -287,7 +305,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 546125532}
   m_Enabled: 1
-  m_ExtensionPropertyValues: []
 --- !u!124 &546125534
 Behaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +347,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!4 &546125536
 Transform:
   m_ObjectHideFlags: 0

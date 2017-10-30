@@ -22,8 +22,7 @@ GameObject:
   - component: {fileID: 33021832186457960}
   - component: {fileID: 136693306585060982}
   - component: {fileID: 23970320338586098}
-  - component: {fileID: 114810936546291530}
-  - component: {fileID: 114545453949440708}
+  - component: {fileID: 114887138340645000}
   m_Layer: 0
   m_Name: tornado
   m_TagString: tornado
@@ -85,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1210606260755200}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114545453949440708
+--- !u!114 &114887138340645000
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -93,22 +92,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1210606260755200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6876423196ae741c8b58fbf2772c5b6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 97826288cf9124772aa10a12c164c16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114810936546291530
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1210606260755200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df748a330224a4a0d90fb572f309c1fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPosition: 0
-  yPosition: 0
+  startSpot: 0
 --- !u!136 &136693306585060982
 CapsuleCollider:
   m_ObjectHideFlags: 1

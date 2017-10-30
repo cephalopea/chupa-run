@@ -82,21 +82,14 @@ public class groundScript : touchableScript {
 
 	void TrackPlayer() {
 		GameObject player = GameObject.FindWithTag ("chupacabra");
-		float playerLocation = default(float);
-		player.GetComponent<playerScript> ().GetX(playerLocation);
+		float playerLocation = player.GetComponent<playerScript> ().x;
 		if (playerLocation > (xParameterB + 100)) {
-			GroundDespawn ();
+			Destroy (this.gameObject);
 		} else if (playerLocation >= groundVector.x && reproducedBool == false) {
 			Reproduce ();
 		} else {
 			//do nothing
 		}
-	}
-
-	//gets rid of this ground
-	void GroundDespawn () {
-		GameObject me = this.gameObject;
-		Destroy (me);
 	}
 
 	//makes next ground

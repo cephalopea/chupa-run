@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class shouseScript : touchableScript {
+public class shouseScript : objectScript {
+
+	public float x;
+
+	void GetPosition(){
+		x = this.transform.position.x;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +17,7 @@ public class shouseScript : touchableScript {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		GetPosition ();
+		//DefunctDespawn (0.1f, this.gameObject);
 	}
 }

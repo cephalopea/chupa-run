@@ -6,8 +6,13 @@ using UnityEngine.SceneManagement;
 public class playerScript : touchableScript {
 
 	//to-do:
+	//figure out weird tornado bug where you go way too fucking high and then break through the ground
+	//this might be fixed? dunno
 	//-make obstacle spawn related to speed, so you can get around obstacles more easily (something about forcemode.impulse maybe)
 
+	//public positions for use in other scripts, since these are accessed often
+	public float x;
+	public float y;
 	//change speed to change speed
 	float speed = 10.0f;
 	//used for tornado jumping
@@ -25,6 +30,11 @@ public class playerScript : touchableScript {
 	Vector3 speedVector;
 	GameObject whatTrap;
 	float mobDistance;
+
+	void GetPosition() {
+		x = this.transform.position.x;
+		y = this.transform.position.y;
+	}
 
 	//prints distance from mob onscreen so you know how dead ya are
 	void OnGUI () {
@@ -61,8 +71,7 @@ public class playerScript : touchableScript {
 	}
 
 	void UpdateMobDistance() {
-		float mobSpot = default(float);
-		GameObject.FindWithTag ("mob").GetComponent<mobScript> ().GetX(mobSpot);
+		float mobSpot = GameObject.FindWithTag ("mob").GetComponent<mobScript> ().x;
 		mobDistance = this.transform.position.x - mobSpot;
 	}
 		
@@ -95,7 +104,13 @@ public class playerScript : touchableScript {
 			speed = (speed * 0.75f);
 		} else if (col.gameObject.tag == "tornado") {
 			speed = (speed * 0.5f);
-			myBody.AddForce(jump * jumpForce, ForceMode.Impulse);
+			if (jump.y < 5) {
+				myBody.AddForce (jump * jumpForce, ForceMode.Impulse);
+			} else {
+				myBody.AddForce (unstuckJump, ForceMode.Impulse);
+			}
+		} else if (col.gameObject.tag == "house") { 
+			isJumping = false;
 		} else if (col.gameObject.tag == "houseSide") {
 			touched = col.gameObject;
 			HouseSide ();
@@ -117,11 +132,9 @@ public class playerScript : touchableScript {
 	//stops player for 3s when in a trap, and removes them from the trap so they aren't stuck over and over
 	IEnumerator TouchedTrap() {
 		touchedTrap = true;
-		float xPosition = default(float);
-		GetX (xPosition);
+		float xPosition = this.transform.position.x;
 		float trapWidth = 4f;
-		float trapLocation = default(float);
-		whatTrap.GetComponent<badObjectScript> ().GetX (trapLocation);
+		float trapLocation = whatTrap.GetComponent<trapScript> ().x;
 		float playerWidth = 2f;
 		float trappedDepth = ((trapLocation + trapWidth / 2) - (xPosition - (playerWidth/2)));
 		float previousSpeed = speed;
@@ -141,10 +154,10 @@ public class playerScript : touchableScript {
 		float houseHeight = 6f;
 		float houseLocation = default(float);
 
-		this.GetComponent<shouseScript> ().GetY (elevation);
-		touched.GetComponent<shouseScript> ().GetX(houseLocation);
+		elevation = this.transform.position.y;
+		houseLocation = touched.GetComponent<shouseScript> ().x;
 
-		if (elevation <= houseHeight) {
+		if ((elevation <= houseHeight) && (this.transform.position.x <= houseLocation + 0.5f)) {
 			isJumping = false;
 			if (elevation <= 5.5f) {
 				jump = stuckJump;
@@ -158,7 +171,7 @@ public class playerScript : touchableScript {
 		
 	//restarts the level when you die
 	void IsDead() {
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene("lvl1");
 	}
 
 	// Use this for initialization
@@ -170,6 +183,7 @@ public class playerScript : touchableScript {
 	
 	// Update is called once per frame
 	void Update () {
+		GetPosition ();
 		UpdateEndlessRun ();
 		JumpUpdate ();
 		UpdateMobDistance ();

@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class goatScript : objectScript {
+public class trapScript : objectScript {
+
+	public float x;
+
+	void GetPosition() {
+		x = this.transform.position.x;
+	}
 
 	void OnCollisionEnter(Collision col) {
 		if (col.gameObject.tag == "chupacabra") {
@@ -12,11 +18,12 @@ public class goatScript : objectScript {
 
 	// Use this for initialization
 	void Start () {
-		SetColor (Color.green);
+		SetColor (Color.red);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		DefunctDespawn (3f, this.gameObject);
+		GetPosition ();
+		DefunctDespawn (4f, this.gameObject);
 	}
 }

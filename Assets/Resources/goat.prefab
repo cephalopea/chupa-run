@@ -23,8 +23,7 @@ GameObject:
   - component: {fileID: 136150814154089476}
   - component: {fileID: 23622383035456680}
   - component: {fileID: 54589967815653884}
-  - component: {fileID: 114484969155540304}
-  - component: {fileID: 114069923002795470}
+  - component: {fileID: 114389682696437662}
   m_Layer: 0
   m_Name: goat
   m_TagString: goat
@@ -101,7 +100,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &114069923002795470
+--- !u!114 &114389682696437662
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,22 +108,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1750785837264760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6876423196ae741c8b58fbf2772c5b6a, type: 3}
+  m_Script: {fileID: 11500000, guid: aa748c57e315c4452943f313020d3a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114484969155540304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1750785837264760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df748a330224a4a0d90fb572f309c1fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPosition: 0
-  yPosition: 0
 --- !u!136 &136150814154089476
 CapsuleCollider:
   m_ObjectHideFlags: 1

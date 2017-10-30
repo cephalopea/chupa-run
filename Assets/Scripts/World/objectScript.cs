@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class objectScript : touchableScript {
 
-	public void DefunctDespawn(float width) {
+	public float startSpot = default(float);
+
+	public void DefunctDespawn(float width, GameObject me) {
 		float playerPosition = default(float);
 		float mobPosition = default(float);
 
-		GameObject.FindWithTag ("mob").GetComponent<mobScript> ().GetX(mobPosition);
-		GameObject.FindWithTag ("chupacabra").GetComponent<playerScript> ().GetX(playerPosition);
-		if (this.transform.position.x < (playerPosition - 100) || (this.transform.position.x <= mobPosition + 25 + width/2)) {
-			Destroy (this.gameObject);
+		mobPosition = GameObject.FindWithTag ("mob").GetComponent<mobScript> ().x;
+		playerPosition = GameObject.FindWithTag ("chupacabra").GetComponent<playerScript> ().x;
+		if (me.transform.position.x < (playerPosition - 100) || (me.transform.position.x <= mobPosition + 25 + width/2)) {
+			Destroy (me);
 		}
 	}
 

@@ -54,8 +54,10 @@
      <Compile Include="Assets\Scripts\Other\cameraScript.cs" />
      <Compile Include="Assets\Scripts\Other\guiScript.cs" />
      <Compile Include="Assets\Scripts\Other\titleQuadScript.cs" />
-     <Compile Include="Assets\Scripts\World\Bad\badObjectScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\cactusScript.cs" />
      <Compile Include="Assets\Scripts\World\Bad\mobScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\tornadoScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\trapScript.cs" />
      <Compile Include="Assets\Scripts\World\Exists\groundScript.cs" />
      <Compile Include="Assets\Scripts\World\Exists\houseScript.cs" />
      <Compile Include="Assets\Scripts\World\Exists\shouseScript.cs" />

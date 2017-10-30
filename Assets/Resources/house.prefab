@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33269914954682314}
   - component: {fileID: 65962673571518306}
   - component: {fileID: 23523706678102246}
-  - component: {fileID: 114566521789644284}
+  - component: {fileID: 114038537261426036}
   m_Layer: 0
   m_Name: house
   m_TagString: house
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 33067334136279702}
   - component: {fileID: 65356446791987780}
   - component: {fileID: 23036919793795476}
-  - component: {fileID: 114259147869097584}
+  - component: {fileID: 114524622372208096}
   m_Layer: 0
   m_Name: house side
   m_TagString: houseSide
@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1922562648756488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.50208336, y: 0, z: -0.25}
+  m_LocalPosition: {x: -0.50208336, y: 0, z: 0}
   m_LocalScale: {x: 0.004166667, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4490768147563740}
@@ -182,20 +182,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114259147869097584
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1922562648756488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df748a330224a4a0d90fb572f309c1fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPosition: 0
-  yPosition: 0
---- !u!114 &114566521789644284
+--- !u!114 &114038537261426036
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -203,8 +190,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1742553583246058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df748a330224a4a0d90fb572f309c1fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 52f0e27b6014746efb98c2fa4ef71617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPosition: 0
-  yPosition: 0
+  startSpot: 0
+  x: 0
+--- !u!114 &114524622372208096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922562648756488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1799f666a3a491690f27e8076dfb71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0

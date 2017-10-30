@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33900801255782684}
   - component: {fileID: 64345365910341148}
   - component: {fileID: 23809232033572826}
-  - component: {fileID: 114533179028006548}
+  - component: {fileID: 114861387740050748}
   m_Layer: 0
   m_Name: trap
   m_TagString: trap
@@ -98,7 +98,7 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114533179028006548
+--- !u!114 &114861387740050748
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -106,8 +106,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1571198685953070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df748a330224a4a0d90fb572f309c1fe, type: 3}
+  m_Script: {fileID: 11500000, guid: d9671fec184f241f1bf1815c30427211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPosition: 0
-  yPosition: 0
+  startSpot: 0
