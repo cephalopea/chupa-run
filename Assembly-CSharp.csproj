@@ -51,16 +51,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\cameraScript.cs" />
-     <Compile Include="Assets\Scripts\groundScript.cs" />
-     <Compile Include="Assets\Scripts\guiScript.cs" />
-     <Compile Include="Assets\Scripts\mobScript.cs" />
-     <Compile Include="Assets\Scripts\oscillatoryScript.cs" />
-     <Compile Include="Assets\Scripts\planeScript.cs" />
-     <Compile Include="Assets\Scripts\playerScript.cs" />
-     <Compile Include="Assets\Scripts\readMe.cs" />
-     <Compile Include="Assets\Scripts\sliderScript.cs" />
-     <Compile Include="Assets\Scripts\touchableScript.cs" />
+     <Compile Include="Assets\Scripts\Other\cameraScript.cs" />
+     <Compile Include="Assets\Scripts\Other\guiScript.cs" />
+     <Compile Include="Assets\Scripts\Other\titleQuadScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\cactusScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\mobScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\tornadoScript.cs" />
+     <Compile Include="Assets\Scripts\World\Bad\trapScript.cs" />
+     <Compile Include="Assets\Scripts\World\Exists\groundScript.cs" />
+     <Compile Include="Assets\Scripts\World\Exists\houseScript.cs" />
+     <Compile Include="Assets\Scripts\World\Exists\shouseScript.cs" />
+     <Compile Include="Assets\Scripts\World\Good\goatScript.cs" />
+     <Compile Include="Assets\Scripts\World\Good\kidScript.cs" />
+     <Compile Include="Assets\Scripts\World\Good\playerScript.cs" />
+     <Compile Include="Assets\Scripts\World\objectScript.cs" />
+     <Compile Include="Assets\Scripts\World\touchableScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

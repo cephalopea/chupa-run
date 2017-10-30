@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33851334053841768}
   - component: {fileID: 64461150832565316}
   - component: {fileID: 23114584259885128}
-  - component: {fileID: 114548116382735724}
   - component: {fileID: 114139589288171530}
   m_Layer: 0
   m_Name: ground
@@ -110,19 +109,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c399cc32c364e4ed48f84dc6acded041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114548116382735724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1426216756778954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df748a330224a4a0d90fb572f309c1fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPosition: 0
-  yPosition: 0
-  zPosition: 0
-  height: 0
-  width: 0

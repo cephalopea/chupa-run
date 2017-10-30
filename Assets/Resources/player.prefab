@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33619903492699804}
   - component: {fileID: 135490134261551402}
   - component: {fileID: 23951289533481872}
-  - component: {fileID: 114234647403704328}
   - component: {fileID: 114959217929012578}
   - component: {fileID: 54138457063794088}
   m_Layer: 0
@@ -101,19 +100,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &114234647403704328
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1948497931719442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df748a330224a4a0d90fb572f309c1fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPosition: 0
-  yPosition: 0
 --- !u!114 &114959217929012578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08a71bcaf6894959bc1cd233ae612a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTouched: 
 --- !u!135 &135490134261551402
 SphereCollider:
   m_ObjectHideFlags: 1
